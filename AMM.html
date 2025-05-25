@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation system</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 130%;
+        }
+        .wrapper{
+            width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        label{
+            width: 180px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input{
+            width: 280px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .formelement{
+            margin-bottom: 20px;
+        }
+        #submitbutton {
+            margin-left: 180px;
+            width: 150px;
+            font-size: 18px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #submitbutton:hover {
+            background-color: #0056b3;
+        }
+        #errors,#success{
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #errors{
+            color: red;
+        }
+        #success{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="errors"> </div>
+    <div id="success"></div>
+    <div class="wrapper">
+      <div class="formelement">
+          <label for="Email">Email</label>
+          <input type="text" id="Email" name="Email">
+      </div>
+
+      <div class="formelement">
+          <label for="phoneno">Phone-Number</label>
+          <input type="text" id="phoneno" name="phoneno">
+      </div>
+
+      <div class="formelement">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password">
+      </div>
+
+      <div class="formelement">
+          <label for="confirmpassword">Confirm-Password</label>
+          <input type="password" id="confirmpassword" name="confirmpassword">
+      </div>
+      <input type="submit" name="" id="submitbutton">
+    </div>
+
+  <script>
+           var errormessage="";
+           var missingfield="";
+          function isEmail(email) {
+          var regex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+          return regex.test(email);
+           }
+           $("#submitbutton").click(function () {
+               missingfield = "";
+               errormessage = "";
+               
+               $("#errors").html("");
+               $("#success").html("");
+           
+               const email = $("#Email").val();
+               const phone = $("#phoneno").val();
+               const password = $("#password").val();
+               const confirmPassword = $("#confirmpassword").val();
+           
+               // Email
+               if (email === "") {
+                   missingfield += "<p>Email is required.</p>";
+               } else if (!isEmail(email)) {
+                   errormessage += "<p>Email ID is not valid.</p>";
+               }
+           
+               // Phone number
+               if (phone === "") {
+                   missingfield += "<p>Phone number is required.</p>";
+               } else if (!/^\d{10}$/.test(phone)) {
+                   errormessage += "<p>Phone number must be exactly 10 digits.</p>";
+               }
+           
+               // Password
+               if (password === "") {
+                   missingfield += "<p>Password is required. Please choose a strong password.</p>";
+               } else {
+                   // Check password strength
+                   const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
+                   if (!strongPasswordRegex.test(password)) {
+                       errormessage += "<p>Password must be at least 8 characters and include uppercase, lowercase, number, and special character.</p>";
+                   }
+               }
+           
+               // Confirm Password
+               if (password !== confirmPassword) {
+                   errormessage += "<p>Passwords do not match.</p>";
+               }
+           
+               // Final result
+               if (errormessage === "" && missingfield === "") {
+                   $("#success").html("You are registered");
+               } else {
+                   $("#errors").html(errormessage + missingfield);
+               }
+           });
+  </script>
+
+</body>
+</html>
