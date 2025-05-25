@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form validation system</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>   
 </head>
 <body>
-    <div id="errors"> </div>
-    <div id="success"></div>
     <div class="wrapper">
+       <div id="errors"> </div>
+       <div id="success"></div>
+
       <div class="formelement">
           <label for="Email">Email</label>
           <input type="text" id="Email" name="Email">
@@ -30,8 +31,10 @@
           <label for="confirmpassword">Confirm-Password</label>
           <input type="password" id="confirmpassword" name="confirmpassword">
       </div>
+
       <input type="submit" name="" id="submitbutton">
     </div>
+    
 <script src="script.js"></script>
 </body>
 </html>
