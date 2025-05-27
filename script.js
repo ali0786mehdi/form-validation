@@ -45,10 +45,24 @@ $("#submitbutton").click(function () {
 
     // Show messages AFTER validation
     if (errormessage === "" && missingfield === "") {
-        $("#errors").hide().html(""); // hide error box
+        $("#errors").hide().html("");
         $("#success").html("✅ You are successfully registered!").fadeIn();
     } else {
-        $("#success").hide().html(""); // hide success box
+        $("#success").hide().html("");
         $("#errors").html(errormessage + missingfield).fadeIn();
     }
+});
+
+// Allow only digits in phone number input and max 10 digits
+$("#phoneno").on("input", function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 10);
+});
+
+// Toggle password visibility
+$(".toggle-password").on("click", function () {
+    const target = $(this).data("target");
+    const input = $(target);
+    const type = input.attr("type") === "password" ? "text" : "password";
+    input.attr("type", type);
+    $(this).text(type === "password" ? "Show" : "Hide");
 });

@@ -21,7 +21,8 @@ label {
     font-weight: bold;
 }
 
-input {
+input[type="text"],
+input[type="password"] {
     width: 280px;
     font-size: 18px;
     border: 1px solid #ccc;
@@ -32,6 +33,27 @@ input {
 
 .formelement {
     margin-bottom: 20px;
+    position: relative;
+}
+
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-password {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.toggle-password:hover {
+    background-color: #5a6268;
 }
 
 #submitbutton {
